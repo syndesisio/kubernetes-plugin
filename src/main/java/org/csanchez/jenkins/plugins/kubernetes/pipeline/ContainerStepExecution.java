@@ -4,13 +4,13 @@ import java.io.Closeable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import hudson.FilePath;
 import org.jenkinsci.plugins.workflow.steps.AbstractStepExecutionImpl;
 import org.jenkinsci.plugins.workflow.steps.BodyExecutionCallback;
 import org.jenkinsci.plugins.workflow.steps.BodyInvoker;
 import org.jenkinsci.plugins.workflow.steps.EnvironmentExpander;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
 
-import hudson.EnvVars;
 import hudson.LauncherDecorator;
 import io.fabric8.kubernetes.client.KubernetesClient;
 
@@ -43,7 +43,7 @@ public class ContainerStepExecution extends AbstractStepExecutionImpl {
         client = nodeContext.connectToCloud();
 
         EnvironmentExpander env = getContext().get(EnvironmentExpander.class);
-        decorator = new ContainerExecDecorator(client, nodeContext.getPodName(), containerName, nodeContext.getNamespace(), env);
+        decorator = new ContainerExecDecorator(client, nodeContext.getPodName(), containerName, nodeContext.getNamespace(), env, getContext().get(FilePath.class));
         getContext().newBodyInvoker()
                 .withContext(BodyInvoker
                         .mergeLauncherDecorators(getContext().get(LauncherDecorator.class), decorator))
