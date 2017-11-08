@@ -37,7 +37,7 @@
     <jackson.version>2.5.0</jackson.version>
     <jenkins.version>2.32.1</jenkins.version>
 
-    <kubernetes-client.version>2.6.1</kubernetes-client.version>
+    <kubernetes-client.version>2.6.3</kubernetes-client.version>
     <slf4j.version>1.7.13</slf4j.version>
 
     <!-- jenkins plugins versions -->
